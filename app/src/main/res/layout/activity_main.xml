@@ -12,38 +12,28 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:text="MyRestaurants"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorTextIcons"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="0dp" />
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/findRestaurantsButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@color/colorAccent"
-        android:text="FindRestaurantsButton"
+        android:text="Find Restaurants"
         android:textColor="@color/colorTextIcons"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="231dp" />
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"wrap_content
-        android:layout_alignParentBottom="true"
-        android:text="Find Restaurants"
-        android:textColor="#009688"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteY="459dp" />
+
 
 
 </android.support.constraint.ConstraintLayout>
