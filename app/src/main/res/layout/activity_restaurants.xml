@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".RestaurantsActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurants near "
+        android:id="@+id/locationTextView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+
 </android.support.constraint.ConstraintLayout>
