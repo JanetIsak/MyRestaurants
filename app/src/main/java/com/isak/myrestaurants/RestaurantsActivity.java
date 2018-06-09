@@ -19,7 +19,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 
 
 public class RestaurantsActivity extends AppCompatActivity {
@@ -27,6 +27,9 @@ public class RestaurantsActivity extends AppCompatActivity {
 
     @BindView(R.id.locationTextView) TextView mLocationTextView;
     @BindView(R.id.listView) ListView mListView;
+
+    public ArrayList<Restaurant> mRestaurants = new ArrayList<>();
+
     private String[] restaurants = new String[] {"Mi Mero Mole", "Mother's Bistro",
             "Life of Pie", "Screen Door", "Luc Lac", "Sweet Basil",
             "Slappy Cakes", "Equinox", "Miss Delta's", "Andina",
@@ -78,12 +81,15 @@ public class RestaurantsActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     String jsonData = response.body().string();
+                    if (response.isSuccessful()) {
                     Log.v(TAG, jsonData);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    mRestaurants = yelpService.processResults(response);
+
                 }
-        };
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     });
   }
-
 }
