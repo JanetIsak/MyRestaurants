@@ -14,9 +14,17 @@ import android.widget.AdapterView;
 import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+
+import java.io.IOException;
+
 
 
 public class RestaurantsActivity extends AppCompatActivity {
+    public static final String TAG = RestaurantsActivity.class.getSimpleName();
+
     @BindView(R.id.locationTextView) TextView mLocationTextView;
     @BindView(R.id.listView) ListView mListView;
     private String[] restaurants = new String[] {"Mi Mero Mole", "Mother's Bistro",
@@ -34,6 +42,8 @@ public class RestaurantsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurants);
         ButterKnife.bind(this);
+        String location = null;
+        getRestaurants(location);
 
 
         MyRestaurantsArrayAdapter adapter = new MyRestaurantsArrayAdapter(this, android.R.layout.simple_list_item_1,
@@ -44,16 +54,36 @@ public class RestaurantsActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String restaurant = ((TextView)view).getText().toString();
+                String restaurant = ((TextView) view).getText().toString();
                 Toast.makeText(RestaurantsActivity.this, restaurant, Toast.LENGTH_LONG).show();
             }
         });
 
         Intent intent = getIntent();
-        String location = intent.getStringExtra("location");
+        location = intent.getStringExtra("location");
         mLocationTextView.setText("Here are all the restaurants near: " + location);
 
-
-
     }
+
+    private void getRestaurants(String location) {
+        final YelpService yelpService = new YelpService();
+        yelpService.findRestaurants(location, new Callback() {
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try {
+                    String jsonData = response.body().string();
+                    Log.v(TAG, jsonData);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+        };
+    });
+  }
+
 }
